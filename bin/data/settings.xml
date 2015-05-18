@@ -1,0 +1,60 @@
+<Settings>
+	<Brightness>281</Brightness>
+	<Red_Speed>1</Red_Speed>
+	<Green_Speed>1</Green_Speed>
+	<Blue_Speed>1</Blue_Speed>
+	<Red>255</Red>
+	<Green>30</Green>
+	<Blue>255</Blue>
+	<Shift>100</Shift>
+	<Happiness>
+		<Colour>255, 0, 0, 255</Colour>
+	<Speed>10</Speed>
+		<Length>3</Length>
+	</Happiness>
+	<StressLevel>
+		<Colour>255, 255, 0, 255</Colour>
+	<Speed>10</Speed>
+		<Length>3</Length>
+	</StressLevel>
+	<WorkLoad>
+		<Colour>0, 255, 166, 255</Colour>
+	<Speed>10</Speed>
+		<Length>3</Length>
+	</WorkLoad>
+<Settings/>
+<Categories>
+		<Happiness>127, 127, 127, 255</Happiness>
+		<Speed>10</Speed>
+		<Length>3</Length>
+		<Stresslevel>127, 127, 127, 255</Stresslevel>
+		<Workload>127, 127, 127, 255</Workload>
+	</Categories>
+	<Calibration>
+		<Trigger1>0</Trigger1>
+		<Category>100</Category>
+		<Sentiment>100</Sentiment>
+		<Position>100</Position>
+		<Trigger2>0</Trigger2>
+		<Trigger3>0</Trigger3>
+		<Trigger4>0</Trigger4>
+		<Trigger5>0</Trigger5>
+		<Trigger6>0</Trigger6>
+	<Position_1>100</Position_1>
+		<Position_2>150</Position_2>
+		<Position_3>200</Position_3>
+		<Position_4>250</Position_4>
+		<Position_5>300</Position_5>
+		<Position_6>350</Position_6>
+	</Calibration>
+<Testing>
+		<Trigger1>0</Trigger1>
+		<Category>0</Category>
+		<Sentiment>128</Sentiment>
+		<Trigger2>0</Trigger2>
+		<Trigger3>0</Trigger3>
+		<Trigger4>0</Trigger4>
+		<Trigger5>0</Trigger5>
+		<Trigger6>0</Trigger6>
+	</Testing>
+</Settings>
