@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>8F9C37EE-9B0A-4A3A-813B-7CB5AE2C4732</string>
+	<key>IDESourceControlProjectName</key>
+	<string>SendAndReceive</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>E3954F53AED6F550664C8B21F47998A612238EFF</key>
+		<string>https://github.com/urbanvisuals/Arup_SendAndReceive.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>SendAndReceive.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>E3954F53AED6F550664C8B21F47998A612238EFF</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/urbanvisuals/Arup_SendAndReceive.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>E3954F53AED6F550664C8B21F47998A612238EFF</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>E3954F53AED6F550664C8B21F47998A612238EFF</string>
+			<key>IDESourceControlWCCName</key>
+			<string>SendAndReceive</string>
+		</dict>
+	</array>
+</dict>
+</plist>

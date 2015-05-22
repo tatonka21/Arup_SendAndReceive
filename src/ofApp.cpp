@@ -7,7 +7,13 @@ void ofApp::setup(){
     // we don't want to be running to fast
     ofSetVerticalSync(true);
     ofSetFrameRate(40);
-    testImage.loadImage("gradient.jpg");
+    //testImage.loadImage("gradient.jpg");
+    testImage.allocate(1, 400, OF_IMAGE_COLOR);
+    fbo.allocate(1, 400);
+    //bgPixels.allocate(1, 400, OF_PIXELS_RGB);
+    pixels.allocate(1, 400, OF_PIXELS_RGB);
+    //texture.allocate(pixels);
+    
     
     //create the socket and set to send to 127.0.0.1:11999
     udpConnection.Create();
@@ -23,7 +29,7 @@ void ofApp::setup(){
     //udpIncoming.SetNonBlocking(true);
     
     TCP.setup(8555);
-    TCP.setMessageDelimiter("/TCP");
+    TCP.setMessageDelimiter("\n");
     
     categories.setName("Categories");
     colour0.set("Happiness",ofColor(127),ofColor(0,0),ofColor(255));
@@ -41,32 +47,36 @@ void ofApp::setup(){
 
     testing.setName("Testing");
     testing.add(trig1.set("Trigger1", false));
-    testing.add(trig1Cat.set("Category", 0, 0, 2));
-    testing.add(trig1Sent.set("Sentiment", 128, 0, 255));
+    testing.add(trig1Cat.set("Category1", 0, 0, 2));
+    testing.add(trig1Sent.set("Sentiment1", 128, 0, 255));
     testing.add(trig2.set("Trigger2", false));
-    testing.add(trig2Cat.set("Category", 0, 0, 2));
-    testing.add(trig2Sent.set("Sentiment", 128, 0, 255));
+    testing.add(trig2Cat.set("Category2", 0, 0, 2));
+    testing.add(trig2Sent.set("Sentiment2", 128, 0, 255));
     testing.add(trig3.set("Trigger3", false));
-    testing.add(trig3Cat.set("Category", 0, 0, 2));
-    testing.add(trig3Sent.set("Sentiment", 128, 0, 255));
+    testing.add(trig3Cat.set("Category3", 0, 0, 2));
+    testing.add(trig3Sent.set("Sentiment3", 128, 0, 255));
     testing.add(trig4.set("Trigger4", false));
-    testing.add(trig4Cat.set("Category", 0, 0, 2));
-    testing.add(trig4Sent.set("Sentiment", 128, 0, 255));
+    testing.add(trig4Cat.set("Category4", 0, 0, 2));
+    testing.add(trig4Sent.set("Sentiment4", 128, 0, 255));
     testing.add(trig5.set("Trigger5", false));
-    testing.add(trig5Cat.set("Category", 0, 0, 2));
-    testing.add(trig5Sent.set("Sentiment", 128, 0, 255));
+    testing.add(trig5Cat.set("Category5", 0, 0, 2));
+    testing.add(trig5Sent.set("Sentiment5", 128, 0, 255));
     testing.add(trig6.set("Trigger6", false));
-    testing.add(trig6Cat.set("Category", 0, 0, 2));
-    testing.add(trig6Sent.set("Sentiment", 128, 0, 255));
+    testing.add(trig6Cat.set("Category6", 0, 0, 2));
+    testing.add(trig6Sent.set("Sentiment6", 128, 0, 255));
+    testing.add(trig7.set("Trigger7", false));
+    testing.add(trig7Cat.set("Category7", 0, 0, 2));
+    testing.add(trig7Sent.set("Sentiment7", 128, 0, 255));
 
     
     calibration.setName("Calibration");
-    calibration.add(trig1Pos.set("Position 1", 100, 0, 400));
-    calibration.add(trig2Pos.set("Position 2", 150, 0, 400));
-    calibration.add(trig3Pos.set("Position 3", 200, 0, 400));
-    calibration.add(trig4Pos.set("Position 4", 250, 0, 400));
-    calibration.add(trig5Pos.set("Position 5", 300, 0, 400));
-    calibration.add(trig6Pos.set("Position 6", 350, 0, 400));
+    calibration.add(trig1Pos.set("Position 1", 50, 0, 400));
+    calibration.add(trig2Pos.set("Position 2", 100, 0, 400));
+    calibration.add(trig3Pos.set("Position 3", 150, 0, 400));
+    calibration.add(trig4Pos.set("Position 4", 200, 0, 400));
+    calibration.add(trig5Pos.set("Position 5", 250, 0, 400));
+    calibration.add(trig6Pos.set("Position 6", 300, 0, 400));
+    calibration.add(trig7Pos.set("Position 7", 350, 0, 400));
 
     parameters.setName("Settings");
     parameters.add(brightness.set( "Brightness", 255, 0, 512 ));
@@ -120,24 +130,12 @@ char gamma(unsigned char input) {
 //--------------------------------------------------------------
 void ofApp::update(){
     
-	//for each client lets send them a message letting them know what port they are connected on
-    for(int i = 0; i < TCP.getLastID(); i++){
-        if( !TCP.isClientConnected(i) )continue;
-        
-        TCP.send(i, "hello client - you are connected on port - "+ofToString(TCP.getClientPort(i)) );
-    }
+
+    receiveTCP();
 
     checkTriggers();
-    
     generateImage();
     
-    for (int i = 0; i<balls.size(); i++) {
-        balls[i].update();
-    }
-    
-    receiveTCP();
-    
-    //receiveUDP();
     sendUDP();
     
 }
@@ -182,7 +180,13 @@ void ofApp::checkTriggers(){
         Ball tempBall;									// create the ball object
         tempBall.setup(trig6Pos, trig6Cat, trig6Sent);			// setup its initial state
         balls.push_back(tempBall);						// add it to the vector
-       trig6.set(false);
+        trig6.set(false);
+    }
+    if (trig7 == true){
+        Ball tempBall;									// create the ball object
+        tempBall.setup(trig7Pos, trig7Cat, trig7Sent);			// setup its initial state
+        balls.push_back(tempBall);						// add it to the vector
+        trig7.set(false);
     }
 }
 
@@ -191,34 +195,20 @@ void ofApp::checkTriggers(){
 void ofApp::draw(){
     //set background color
     ofBackgroundGradient(ofColor::white, ofColor::gray);
+    //testImage.draw(400, 100, 50, 400);
+    //ofSetColor(255, 255);
+    fbo.draw(500, 100, 50, 400);
     
-    testImage.draw(400, 100, 50, 400);
-    
+    /*
     for (int i = 0 ; i<balls.size(); i++) {
         balls[i].draw(categories);
     }
+     */
     
     
     ofSetColor(255, 255);
     
-    
-    ofDrawBitmapString(ofGetTimestampString("%b %f %H:%M:%S"), 30, 360);
-    ofDrawBitmapString("Raw Message:", 30, 380);
-    ofDrawBitmapString(inMessage, 30, 400);
-    ofDrawBitmapString("Mac Address:", 30, 440);
-    ofDrawBitmapString(macAddress, 130, 440);
-    ofDrawBitmapString("Category:", 30, 460);
-    ofDrawBitmapString(ofToString(category), 130, 460);
-    ofDrawBitmapString("Sentiment:", 30, 480);
-    ofDrawBitmapString(ofToString(sentiment), 130, 480);
-    
-    ofDrawBitmapString("RFID Tag:", 30, 500);
-    ofDrawBitmapString(rfidTag, 130, 500);
-
-    ofDrawBitmapString("Object Count: ", 30, 540);
-    ofDrawBitmapString(ofToString(balls.size()), 150, 540);
-    
-    
+    printInformation(230, 25);
     gui.draw();
     
     
@@ -237,18 +227,84 @@ void ofApp::generateImage(){
         colorG = ofClamp(colorG*shift/100 + shift-100, 0, 255);
         colorB = ofClamp(colorB*shift/100 + shift-100, 0, 255);
         
-        
+        //pixels.setColor(0, i, );
         testImage.setColor(0, i, ofColor(colorR, colorG, colorB));
-        testImage.update();
     }
+        //bgPixels.setColor(0, i, ofColor(colorR, colorG, colorB));
+        testImage.update();
+        //texture.loadData(bgPixels);
+        
+        //begin FBO
+        fbo.begin();
+        //ofSetColor(0, 0, 0, 255);
+        //ofRect(0, 0, 50, 400);
+        //draw the background image
+        //testImage.draw(0,0);
+        ofSetColor(255, 255);
+
+        testImage.draw(0, 0, 50, 400);
+        
+        //lets's draw the balls:
+        for (int i = 0 ; i<balls.size(); i++) {
+            balls[i].draw(categories);
+        }
+        ofSetColor(255, 255);
+
+        //end FBO
+        fbo.end();
+        
+        fbo.readToPixels(pixels);
+    
+}
+
+
+//--------------------------------------------------------------
+
+void ofApp::printInformation(int x, int y){
+    
+    ofPushMatrix();
+    ofTranslate(x, y);
+    ofSetColor(0, 0, 0);
+    ofDrawBitmapString(ofGetTimestampString("%b %f %H:%M:%S"), 0, 0);
+    ofDrawBitmapString("Raw Message:", 0, 20);
+    ofDrawBitmapString(inMessage, 0, 40);
+    ofDrawBitmapString("Mac Address:", 0, 80);
+    ofDrawBitmapString(macAddress, 110, 80);
+    ofDrawBitmapString("Category:", 0, 100);
+    ofDrawBitmapString(ofToString(category), 110, 100);
+    ofDrawBitmapString("Sentiment:", 0, 120);
+    ofDrawBitmapString(ofToString(sentiment), 110, 120);
+    
+    ofDrawBitmapString("RFID Tag:", 0, 140);
+    ofDrawBitmapString(rfidTag, 110, 140);
+    
+    ofDrawBitmapString("Object Count: ", 0, 180);
+    ofDrawBitmapString(ofToString(balls.size()), 110, 180);
+    
+    ofDrawBitmapString("Connections: ", 0, 200);
+    ofDrawBitmapString(ofToString(TCP.getNumClients()), 110, 200);
+    
+    ofDrawBitmapString("Framerate: ", 0, 220);
+    ofDrawBitmapString(ofToString(ofGetFrameRate()), 110, 220);
+    ofPopMatrix();
+
 }
 
 //--------------------------------------------------------------
 
-//--------------------------------------------------------------
-
 void ofApp::receiveTCP(){
+    
+    // for each client lets send them a message letting them know what port
+    // they are connected on
+    //
+    for(int i = 0; i < TCP.getLastID(); i++){
+        if( !TCP.isClientConnected(i) )continue;
+        
+        TCP.send(i, "Hello YUN - you are connected on port - "+ofToString(TCP.getClientPort(i)) );
+    }
 
+    // Check for messages
+    //
     for(unsigned int i = 0; i < (unsigned int)TCP.getLastID(); i++){
         
         if( !TCP.isClientConnected(i) )continue;
@@ -294,28 +350,7 @@ void ofApp::receiveTCP(){
 }
 
 //--------------------------------------------------------------
-/*
-void ofApp::receiveUDP(){
-    // receive a message if it's available
-    char udpMessage[100000];
-    udpIncoming.Receive(udpMessage,100000);
-    string message=udpMessage;
-    if(message!=""){
-        inMessage = message;
-    }
-    vector<string> splitString = ofSplitString( message, ",");
-    
-    //ofSplitString(inMessage, ",");
-    
-    //lets look at the results
-    if (splitString.size() == 4){
-        macAddress = splitString[0];
-        category = ofToInt(splitString[1]);
-        sentiment = ofToInt(splitString[2]);
-        rfidTag = splitString[3];
-    }
-}
-*/
+
 //--------------------------------------------------------------
 
 void ofApp::sendUDP(){
@@ -353,21 +388,21 @@ void ofApp::sendUDP(){
     message3 = messageHeader3;
     
     for (int i = 0; i <170; i++){  //get 510 bytes
-        message1 += gamma(testImage.getColor(0,i).r);
-        message1 += gamma(testImage.getColor(0,i).g);
-        message1 += gamma(testImage.getColor(0,i).b);
+        message1 += gamma(pixels.getColor(0,i).r);
+        message1 += gamma(pixels.getColor(0,i).g);
+        message1 += gamma(pixels.getColor(0,i).b);
     }
     
     for (int i = 170; i <340; i++){  //get 510 bytes
-        message2 += gamma(testImage.getColor(0,i).r);
-        message2 += gamma(testImage.getColor(0,i).g);
-        message2 += gamma(testImage.getColor(0,i).b);
+        message2 += gamma(pixels.getColor(0,i).r);
+        message2 += gamma(pixels.getColor(0,i).g);
+        message2 += gamma(pixels.getColor(0,i).b);
     }
     
     for (int i = 340; i <400; i++){  //get 510 bytes
-        message3 += gamma(testImage.getColor(0,i).r);
-        message3 += gamma(testImage.getColor(0,i).g);
-        message3 += gamma(testImage.getColor(0,i).b);
+        message3 += gamma(pixels.getColor(0,i).r);
+        message3 += gamma(pixels.getColor(0,i).g);
+        message3 += gamma(pixels.getColor(0,i).b);
     }
     
     float zero = 0;

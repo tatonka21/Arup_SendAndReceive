@@ -16,7 +16,7 @@ public:
     //void receiveUDP();
     void receiveTCP();
     void sendUDP();
-    
+    void printInformation(int x, int y);
     void checkTriggers();
     
     void newBall(int source, int category);
@@ -47,6 +47,9 @@ public:
     
     ofImage testImage;
     ofFbo fbo;
+    ofPixels bgPixels;
+    ofPixels pixels;
+    ofTexture texture;
     
     ofTrueTypeFont  mono;
     ofTrueTypeFont  monosm;
@@ -75,6 +78,7 @@ public:
     ofParameter<int> trig4Pos;
     ofParameter<int> trig5Pos;
     ofParameter<int> trig6Pos;
+    ofParameter<int> trig7Pos;
 
     ofParameterGroup testing;
     ofParameter<bool> trig1;
@@ -83,6 +87,7 @@ public:
     ofParameter<bool> trig4;
     ofParameter<bool> trig5;
     ofParameter<bool> trig6;
+    ofParameter<bool> trig7;
  
     ofParameter<int> trig1Cat;
     ofParameter<int> trig2Cat;
@@ -90,6 +95,7 @@ public:
     ofParameter<int> trig4Cat;
     ofParameter<int> trig5Cat;
     ofParameter<int> trig6Cat;
+    ofParameter<int> trig7Cat;
 
     ofParameter<int> trig1Sent;
     ofParameter<int> trig2Sent;
@@ -97,9 +103,10 @@ public:
     ofParameter<int> trig4Sent;
     ofParameter<int> trig5Sent;
     ofParameter<int> trig6Sent;
+    ofParameter<int> trig7Sent;
 
     
-    ofParameter<int> brightness, speedRed, speedGreen, speedBlue, faderRed, faderGreen, faderBlue, shift;
+    ofParameter<int> london, brightness, speedRed, speedGreen, speedBlue, faderRed, faderGreen, faderBlue, shift;
  
     ofxPanel gui;
  

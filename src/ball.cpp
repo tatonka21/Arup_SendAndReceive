@@ -46,5 +46,5 @@ void Ball::draw(ofParameterGroup& palette){
             break;
     }
     
-    ofCircle(300, pos, 20);
+    ofCircle(0, pos, palette.getInt("Length"));
 }
