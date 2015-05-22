@@ -31,6 +31,13 @@ void ofApp::setup(){
     TCP.setup(8555);
     TCP.setMessageDelimiter("\n");
     
+    setupGUI();
+    
+}
+
+//--------------------------------------------------------------
+
+void ofApp::setupGUI(){
     categories.setName("Categories");
     colour0.set("Happiness",ofColor(127),ofColor(0,0),ofColor(255));
     colour1.set("Stresslevel",ofColor(127),ofColor(0,0),ofColor(255));
@@ -44,30 +51,30 @@ void ofApp::setup(){
     categories.add(colour2);
     categories.add(speed2.set("Speed", 10, 0, 200));
     categories.add(length2.set("Length", 3, 0, 20));
-
+    
     testing.setName("Testing");
     testing.add(trig1.set("Trigger1", false));
     testing.add(trig1Cat.set("Category1", 0, 0, 2));
-    testing.add(trig1Sent.set("Sentiment1", 128, 0, 255));
+    testing.add(trig1Sent.set("Sentiment1", 128, 0, 512));
     testing.add(trig2.set("Trigger2", false));
     testing.add(trig2Cat.set("Category2", 0, 0, 2));
-    testing.add(trig2Sent.set("Sentiment2", 128, 0, 255));
+    testing.add(trig2Sent.set("Sentiment2", 128, 0, 512));
     testing.add(trig3.set("Trigger3", false));
     testing.add(trig3Cat.set("Category3", 0, 0, 2));
-    testing.add(trig3Sent.set("Sentiment3", 128, 0, 255));
+    testing.add(trig3Sent.set("Sentiment3", 128, 0, 512));
     testing.add(trig4.set("Trigger4", false));
     testing.add(trig4Cat.set("Category4", 0, 0, 2));
-    testing.add(trig4Sent.set("Sentiment4", 128, 0, 255));
+    testing.add(trig4Sent.set("Sentiment4", 128, 0, 512));
     testing.add(trig5.set("Trigger5", false));
     testing.add(trig5Cat.set("Category5", 0, 0, 2));
-    testing.add(trig5Sent.set("Sentiment5", 128, 0, 255));
+    testing.add(trig5Sent.set("Sentiment5", 128, 0, 512));
     testing.add(trig6.set("Trigger6", false));
     testing.add(trig6Cat.set("Category6", 0, 0, 2));
-    testing.add(trig6Sent.set("Sentiment6", 128, 0, 255));
+    testing.add(trig6Sent.set("Sentiment6", 128, 0, 512));
     testing.add(trig7.set("Trigger7", false));
     testing.add(trig7Cat.set("Category7", 0, 0, 2));
-    testing.add(trig7Sent.set("Sentiment7", 128, 0, 255));
-
+    testing.add(trig7Sent.set("Sentiment7", 128, 0, 512));
+    
     
     calibration.setName("Calibration");
     calibration.add(trig1Pos.set("Position 1", 50, 0, 400));
@@ -77,8 +84,9 @@ void ofApp::setup(){
     calibration.add(trig5Pos.set("Position 5", 250, 0, 400));
     calibration.add(trig6Pos.set("Position 6", 300, 0, 400));
     calibration.add(trig7Pos.set("Position 7", 350, 0, 400));
-
+    
     parameters.setName("Settings");
+    //parameters.add(london.set(" In London", true));
     parameters.add(brightness.set( "Brightness", 255, 0, 512 ));
     parameters.add(speedRed.set( "Red Speed", 1, 0, 50 ));
     parameters.add(speedGreen.set( "Green Speed", 1, 0, 50 ));
@@ -87,7 +95,7 @@ void ofApp::setup(){
     parameters.add(faderGreen.set( "Green", 255, 0, 255 ));
     parameters.add(faderBlue.set( "Blue", 255, 0, 255 ));
     parameters.add(shift.set( "Shift", 100, 0, 255));
-
+    
     parameters.add(categories);
     parameters.add((testing));
     parameters.add(calibration);
@@ -96,10 +104,12 @@ void ofApp::setup(){
     //gui.setSize(300, 500);
     gui.loadFromFile("settings.xml");
     gui.minimizeAll();
-    
-    
+
 }
 
+//--------------------------------------------------------------
+
+// This needs to be before update()
 char gammaLUT[] = {
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  1,  1,  1,  1,
@@ -119,9 +129,6 @@ char gammaLUT[] = {
     215,218,220,223,225,228,231,233,236,239,241,244,247,249,252,255
 };
 
-
-
-
 char gamma(unsigned char input) {
     return gammaLUT[input];
 }
@@ -132,10 +139,8 @@ void ofApp::update(){
     
 
     receiveTCP();
-
     checkTriggers();
     generateImage();
-    
     sendUDP();
     
 }
@@ -188,6 +193,8 @@ void ofApp::checkTriggers(){
         balls.push_back(tempBall);						// add it to the vector
         trig7.set(false);
     }
+    
+    
 }
 
 //--------------------------------------------------------------
@@ -244,8 +251,9 @@ void ofApp::generateImage(){
 
         testImage.draw(0, 0, 50, 400);
         
-        //lets's draw the balls:
+        //lets's calculate and draw the balls:
         for (int i = 0 ; i<balls.size(); i++) {
+            balls[i].update(categories);
             balls[i].draw(categories);
         }
         ofSetColor(255, 255);
@@ -338,12 +346,29 @@ void ofApp::receiveTCP(){
         
         vector<string> splitString = ofSplitString(str, ",");
         
-        //lets look at the results
+        // Lets look at the results and do something
+        // We'll print out the data, and trigger some events.
+        //
         if (splitString.size() == 4){
+            // If it's a proper event let's log it to a file
+            // TODO LOG TIMESTAMP and splitString
+            
+            
+            // And setup our triggers
+            if (splitString[0] == MAC1) trig1 = true;  //  arduino 1
+            if (splitString[0] == MAC2) trig2 = true;  //  arduino 2
+            if (splitString[0] == MAC3) trig3 = true;
+            if (splitString[0] == MAC4) trig4 = true;
+            if (splitString[0] == MAC5) trig5 = true;
+            if (splitString[0] == MAC6) trig6 = true;
+            if (splitString[0] == MAC7) trig7 = true;
+            
+            // and set variables for on screen infomation
             macAddress = splitString[0];
             category = ofToInt(splitString[1]);
-            sentiment = ofToInt(splitString[2]);
+            sentiment = ofToInt(splitString[2])/2;
             rfidTag = splitString[3];
+
         }
         
     }
