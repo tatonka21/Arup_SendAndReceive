@@ -1,5 +1,5 @@
 <Settings>
-	<Brightness>281</Brightness>
+	<Brightness>79</Brightness>
 	<Red_Speed>1</Red_Speed>
 	<Green_Speed>1</Green_Speed>
 	<Blue_Speed>1</Blue_Speed>
@@ -25,7 +25,7 @@
 <Settings/>
 <Categories>
 		<Happiness>0, 127, 255, 255</Happiness>
-		<Speed>10</Speed>
+		<Speed>1</Speed>
 		<Length>3</Length>
 		<Stresslevel>255, 0, 0, 255</Stresslevel>
 		<Workload>0, 255, 0, 255</Workload>
@@ -60,7 +60,7 @@
 	<Category1>0</Category1>
 		<Sentiment1>128</Sentiment1>
 		<Category2>1</Category2>
-		<Sentiment2>128</Sentiment2>
+		<Sentiment2>512</Sentiment2>
 		<Category3>2</Category3>
 		<Sentiment3>128</Sentiment3>
 		<Category4>0</Category4>
@@ -73,4 +73,27 @@
 		<Category7>0</Category7>
 		<Sentiment7>128</Sentiment7>
 	</Testing>
+<Triggers>
+		<Trigger1>0</Trigger1>
+		<Category1>0</Category1>
+		<Sentiment1>128</Sentiment1>
+		<Trigger2>0</Trigger2>
+		<Category2>2</Category2>
+		<Sentiment2>512</Sentiment2>
+		<Trigger3>0</Trigger3>
+		<Category3>0</Category3>
+		<Sentiment3>128</Sentiment3>
+		<Trigger4>0</Trigger4>
+		<Category4>2</Category4>
+		<Sentiment4>512</Sentiment4>
+		<Trigger5>0</Trigger5>
+		<Category5>0</Category5>
+		<Sentiment5>128</Sentiment5>
+		<Trigger6>0</Trigger6>
+		<Category6>2</Category6>
+		<Sentiment6>512</Sentiment6>
+		<Trigger7>0</Trigger7>
+		<Category7>0</Category7>
+		<Sentiment7>128</Sentiment7>
+	</Triggers>
 </Settings>

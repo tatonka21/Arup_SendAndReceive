@@ -52,28 +52,28 @@ void ofApp::setupGUI(){
     categories.add(speed2.set("Speed", 10, 0, 200));
     categories.add(length2.set("Length", 3, 0, 20));
     
-    testing.setName("Testing");
-    testing.add(trig1.set("Trigger1", false));
-    testing.add(trig1Cat.set("Category1", 0, 0, 2));
-    testing.add(trig1Sent.set("Sentiment1", 128, 0, 512));
-    testing.add(trig2.set("Trigger2", false));
-    testing.add(trig2Cat.set("Category2", 0, 0, 2));
-    testing.add(trig2Sent.set("Sentiment2", 128, 0, 512));
-    testing.add(trig3.set("Trigger3", false));
-    testing.add(trig3Cat.set("Category3", 0, 0, 2));
-    testing.add(trig3Sent.set("Sentiment3", 128, 0, 512));
-    testing.add(trig4.set("Trigger4", false));
-    testing.add(trig4Cat.set("Category4", 0, 0, 2));
-    testing.add(trig4Sent.set("Sentiment4", 128, 0, 512));
-    testing.add(trig5.set("Trigger5", false));
-    testing.add(trig5Cat.set("Category5", 0, 0, 2));
-    testing.add(trig5Sent.set("Sentiment5", 128, 0, 512));
-    testing.add(trig6.set("Trigger6", false));
-    testing.add(trig6Cat.set("Category6", 0, 0, 2));
-    testing.add(trig6Sent.set("Sentiment6", 128, 0, 512));
-    testing.add(trig7.set("Trigger7", false));
-    testing.add(trig7Cat.set("Category7", 0, 0, 2));
-    testing.add(trig7Sent.set("Sentiment7", 128, 0, 512));
+    triggers.setName("Triggers");
+    triggers.add(trig1.set("Trigger1", false));
+    triggers.add(trig1Cat.set("Category1", 0, 0, 2));
+    triggers.add(trig1Sent.set("Sentiment1", 128, 0, 512));
+    triggers.add(trig2.set("Trigger2", false));
+    triggers.add(trig2Cat.set("Category2", 0, 0, 2));
+    triggers.add(trig2Sent.set("Sentiment2", 128, 0, 512));
+    triggers.add(trig3.set("Trigger3", false));
+    triggers.add(trig3Cat.set("Category3", 0, 0, 2));
+    triggers.add(trig3Sent.set("Sentiment3", 128, 0, 512));
+    triggers.add(trig4.set("Trigger4", false));
+    triggers.add(trig4Cat.set("Category4", 0, 0, 2));
+    triggers.add(trig4Sent.set("Sentiment4", 128, 0, 512));
+    triggers.add(trig5.set("Trigger5", false));
+    triggers.add(trig5Cat.set("Category5", 0, 0, 2));
+    triggers.add(trig5Sent.set("Sentiment5", 128, 0, 512));
+    triggers.add(trig6.set("Trigger6", false));
+    triggers.add(trig6Cat.set("Category6", 0, 0, 2));
+    triggers.add(trig6Sent.set("Sentiment6", 128, 0, 512));
+    triggers.add(trig7.set("Trigger7", false));
+    triggers.add(trig7Cat.set("Category7", 0, 0, 2));
+    triggers.add(trig7Sent.set("Sentiment7", 128, 0, 512));
     
     
     calibration.setName("Calibration");
@@ -97,7 +97,7 @@ void ofApp::setupGUI(){
     parameters.add(shift.set( "Shift", 100, 0, 255));
     
     parameters.add(categories);
-    parameters.add((testing));
+    parameters.add((triggers));
     parameters.add(calibration);
     
     gui.setup(parameters);
@@ -344,31 +344,73 @@ void ofApp::receiveTCP(){
             inMessage = str;
         }
         
-        vector<string> splitString = ofSplitString(str, ",");
-        
-        // Lets look at the results and do something
-        // We'll print out the data, and trigger some events.
+        // Let's see if the string has comma delimiters
+        // We are defining a correct packet by checking for 4 commas
         //
+        // We'll print out the data, and trigger some events.
+        vector<string> splitString = ofSplitString(str, ",");
         if (splitString.size() == 4){
-            // If it's a proper event let's log it to a file
-            // TODO LOG TIMESTAMP and splitString
             
-            
-            // And setup our triggers
-            if (splitString[0] == MAC1) trig1 = true;  //  arduino 1
-            if (splitString[0] == MAC2) trig2 = true;  //  arduino 2
-            if (splitString[0] == MAC3) trig3 = true;
-            if (splitString[0] == MAC4) trig4 = true;
-            if (splitString[0] == MAC5) trig5 = true;
-            if (splitString[0] == MAC6) trig6 = true;
-            if (splitString[0] == MAC7) trig7 = true;
-            
-            // and set variables for on screen infomation
+            // Set variables for on screen infomation
             macAddress = splitString[0];
             category = ofToInt(splitString[1]);
             sentiment = ofToInt(splitString[2])/2;
             rfidTag = splitString[3];
 
+            // If it's a proper event let's log it to a file
+            // the log file will be created in the data directory
+            ofFile file;
+            file.open(ofToDataPath("RFIDdata.txt"), ofFile::Append, false);
+            file << ofGetTimestampString("%b %f %H:%M:%S") + "," + str + "\n";
+            file.close();
+            
+            
+            // And setup our triggers
+            if (macAddress == MAC1) {        //  arduino 1
+                trig1Cat = category;
+                trig1Sent = sentiment;
+                trig1 = true;
+            }
+            if (macAddress == MAC2) {        //  arduino 2
+                trig2Cat = category;
+                trig2Sent = sentiment;
+                trig2 = true;
+            }
+            if (macAddress == MAC3) {        //  arduino 3
+                trig3Cat = category;
+                trig3Sent = sentiment;
+                trig3 = true;
+            }
+            if (macAddress == MAC4) {        //  arduino 4
+                trig4Cat = category;
+                trig4Sent = sentiment;
+                trig4 = true;
+            }
+            if (macAddress == MAC5) {        //  arduino 5
+                trig5Cat = category;
+                trig5Sent = sentiment;
+                trig5 = true;
+            }
+            if (macAddress == MAC6) {        //  arduino 6
+                trig6Cat = category;
+                trig6Sent = sentiment;
+                trig6= true;
+            }
+            if (macAddress == MAC7) {        //  arduino 7
+                trig7Cat = category;
+                trig7Sent = sentiment;
+                trig7 = true;
+            }
+            if (macAddress == "00:00:00:00:00:00") {        //  let's test a bunch
+                trig1 = true;
+                trig2 = true;
+                trig3= true;
+                trig4= true;
+                trig5 = true;
+                trig6 = true;
+                trig7 = true;
+            }
+            
         }
         
     }

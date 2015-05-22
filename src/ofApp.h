@@ -96,7 +96,7 @@ public:
     ofParameter<int> trig6Pos;
     ofParameter<int> trig7Pos;
 
-    ofParameterGroup testing;
+    ofParameterGroup triggers;
     ofParameter<bool> trig1;
     ofParameter<bool> trig2;
     ofParameter<bool> trig3;
