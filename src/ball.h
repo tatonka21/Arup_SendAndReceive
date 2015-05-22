@@ -21,7 +21,7 @@ public:
     // Methods
     void setup(int startPos, int category, int sentiment);
     void moveTo();
-    void update();
+    void update(ofParameterGroup& palette);
     void draw(ofParameterGroup& palette);
     
     // Properties

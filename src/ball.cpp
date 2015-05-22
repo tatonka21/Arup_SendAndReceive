@@ -25,10 +25,13 @@ void Ball::moveTo(){
     
 }
 
-void Ball::update(){
+void Ball::update(ofParameterGroup& palette){
 
-
-
+    // divide sentiment by 1.28 to get 400 pixels
+    if (pos > sentiment/1.28)
+        pos = pos - palette.getInt("Speed");
+    if (pos < sentiment/1.28)
+        pos = pos + palette.getInt("Speed");
 }
 
 

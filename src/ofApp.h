@@ -7,11 +7,24 @@
 
 class ofApp : public ofBaseApp{
     
+#define MAC1 "90:A2:DA:F8:5E:68"
+#define MAC2 "90:A2:DA:F8:5E:69"
+#define MAC3 "90:A2:DA:F8:5E:68"
+#define MAC4 "90:A2:DA:F8:5E:69"
+#define MAC5 "90:A2:DA:F8:5E:68"
+#define MAC6 "90:A2:DA:F8:5E:69"
+#define MAC7 "90:A2:DA:F8:5E:68"
+
+#define E682_ADDRESS "192.168.152.251"
+//#define E682_ADDRESS "192.168.1.206"
+
+    
 public:
     void setup();
     void update();
     void draw();
     
+    void setupGUI();
     void generateImage();
     //void receiveUDP();
     void receiveTCP();
@@ -20,6 +33,8 @@ public:
     void checkTriggers();
     
     void newBall(int source, int category);
+
+    //char gamma(unsigned char input);
     
     void keyPressed(int key);
     void keyReleased(int key);
@@ -31,6 +46,7 @@ public:
     void dragEvent(ofDragInfo dragInfo);
     void gotMessage(ofMessage msg);
     void exit();
+ 
     
     ofxUDPManager udpConnection;
     //ofxUDPManager udpIncoming;
@@ -106,11 +122,13 @@ public:
     ofParameter<int> trig7Sent;
 
     
-    ofParameter<int> london, brightness, speedRed, speedGreen, speedBlue, faderRed, faderGreen, faderBlue, shift;
+    ofParameter<int> brightness, speedRed, speedGreen, speedBlue, faderRed, faderGreen, faderBlue, shift;
+    //ofParameter<bool> london;
  
     ofxPanel gui;
  
     char sequencer = 0;
+    char *gammaLUT;
     
     
 };
