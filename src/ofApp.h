@@ -78,14 +78,12 @@ public:
     
     ofParameterGroup categories;
     ofParameter<ofColor> colour0;
-    ofParameter<int> speed0;
-    ofParameter<int> length0;
+    ofParameter<int> speed;
+    ofParameter<int> length;
+    ofParameter<int> pulseSize;
+    ofParameter<float> pulseSpeed;
     ofParameter<ofColor> colour1;
-    ofParameter<int> speed1;
-    ofParameter<int> length1;
     ofParameter<ofColor> colour2;
-    ofParameter<int> speed2;
-    ofParameter<int> length2;
 
     ofParameterGroup calibration;
     ofParameter<int> trig1Pos;

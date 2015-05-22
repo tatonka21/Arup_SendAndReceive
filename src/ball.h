@@ -26,7 +26,9 @@ public:
     
     // Properties
     int pos;
-    
+    float radius;
+    float pulse;
+    bool pulseUp ;
     int category;
     int sentiment;
     

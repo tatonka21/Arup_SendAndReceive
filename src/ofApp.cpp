@@ -42,15 +42,14 @@ void ofApp::setupGUI(){
     colour0.set("Happiness",ofColor(127),ofColor(0,0),ofColor(255));
     colour1.set("Stresslevel",ofColor(127),ofColor(0,0),ofColor(255));
     colour2.set("Workload",ofColor(127),ofColor(0,0),ofColor(255));
+    categories.add(speed.set("Speed", 2, 0, 20));
+    categories.add(length.set("Size", 2, 0, 10));
+    categories.add(pulseSize.set("Pulse Size", 3, 0, 10));
+    categories.add(pulseSpeed.set("Pulse Speed", 0.5, 0, 3));
+    
     categories.add(colour0);
-    categories.add(speed0.set("Speed", 10, 0, 200));
-    categories.add(length0.set("Length", 3, 0, 20));
     categories.add(colour1);
-    categories.add(speed1.set("Speed", 10, 0, 200));
-    categories.add(length1.set("Length", 3, 0, 20));
     categories.add(colour2);
-    categories.add(speed2.set("Speed", 10, 0, 200));
-    categories.add(length2.set("Length", 3, 0, 20));
     
     triggers.setName("Triggers");
     triggers.add(trig1.set("Trigger1", false));

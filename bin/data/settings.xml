@@ -28,7 +28,11 @@
 		<Speed>1</Speed>
 		<Length>3</Length>
 		<Stresslevel>255, 0, 0, 255</Stresslevel>
-		<Workload>0, 255, 0, 255</Workload>
+		<Workload>0, 255, 61, 255</Workload>
+	<Size>1</Size>
+		<PulseSize>3</PulseSize>
+	<Pulse_Size>4</Pulse_Size>
+		<Pulse_Speed>0.0918367</Pulse_Speed>
 	</Categories>
 	<Calibration>
 		<Trigger1>0</Trigger1>
@@ -76,24 +80,24 @@
 <Triggers>
 		<Trigger1>0</Trigger1>
 		<Category1>0</Category1>
-		<Sentiment1>128</Sentiment1>
+		<Sentiment1>475</Sentiment1>
 		<Trigger2>0</Trigger2>
-		<Category2>2</Category2>
+		<Category2>1</Category2>
 		<Sentiment2>512</Sentiment2>
 		<Trigger3>0</Trigger3>
 		<Category3>0</Category3>
-		<Sentiment3>128</Sentiment3>
+		<Sentiment3>75</Sentiment3>
 		<Trigger4>0</Trigger4>
 		<Category4>2</Category4>
 		<Sentiment4>512</Sentiment4>
 		<Trigger5>0</Trigger5>
-		<Category5>0</Category5>
-		<Sentiment5>128</Sentiment5>
+		<Category5>1</Category5>
+		<Sentiment5>62</Sentiment5>
 		<Trigger6>0</Trigger6>
 		<Category6>2</Category6>
 		<Sentiment6>512</Sentiment6>
 		<Trigger7>0</Trigger7>
 		<Category7>0</Category7>
-		<Sentiment7>128</Sentiment7>
+		<Sentiment7>0</Sentiment7>
 	</Triggers>
 </Settings>
