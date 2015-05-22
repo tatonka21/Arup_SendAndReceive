@@ -18,7 +18,7 @@ void ofApp::setup(){
     //create the socket and set to send to 127.0.0.1:11999
     udpConnection.Create();
     // outgoing
-    udpConnection.Connect("192.168.1.206",5568);
+    udpConnection.Connect(E682_ADDRESS,5568);
     udpConnection.SetNonBlocking(true);
     udpConnection.SetEnableBroadcast(false);
     udpConnection.SetReuseAddress(true);
