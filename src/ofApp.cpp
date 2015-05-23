@@ -96,13 +96,19 @@ void ofApp::setupGUI(){
     parameters.add(shift.set( "Shift", 100, 0, 255));
     
     parameters.add(categories);
-    parameters.add((triggers));
-    parameters.add(calibration);
+    parameters.add(triggers);
+
+    calibrationParameters.setName("Calibration");
+    calibrationParameters.add(calibration);
     
     gui.setup(parameters);
     //gui.setSize(300, 500);
     gui.loadFromFile("settings.xml");
     gui.minimizeAll();
+
+    guiCalibration.setup(calibrationParameters);
+    guiCalibration.loadFromFile("calibration.xml");
+    guiCalibration.setPosition(230, 400);
 
 }
 
@@ -216,6 +222,7 @@ void ofApp::draw(){
     
     printInformation(230, 25);
     gui.draw();
+    guiCalibration.draw();
     
     
 }
@@ -307,7 +314,7 @@ void ofApp::receiveTCP(){
     for(int i = 0; i < TCP.getLastID(); i++){
         if( !TCP.isClientConnected(i) )continue;
         
-        TCP.send(i, "Hello YUN - you are connected on port - "+ofToString(TCP.getClientPort(i)) );
+        TCP.send(i, "Hello YUN - Connected on port - "+ofToString(TCP.getClientPort(i)) + " Client ID " + ofToString(i) );
     }
 
     // Check for messages
@@ -344,7 +351,7 @@ void ofApp::receiveTCP(){
         }
         
         // Let's see if the string has comma delimiters
-        // We are defining a correct packet by checking for 4 commas
+        // We are defining a correct packet by checking for 4 delimited messages
         //
         // We'll print out the data, and trigger some events.
         vector<string> splitString = ofSplitString(str, ",");
@@ -403,8 +410,8 @@ void ofApp::receiveTCP(){
             if (macAddress == "00:00:00:00:00:00") {        //  let's test a bunch
                 trig1 = true;
                 trig2 = true;
-                trig3= true;
-                trig4= true;
+                trig3 = true;
+                trig4 = true;
                 trig5 = true;
                 trig6 = true;
                 trig7 = true;

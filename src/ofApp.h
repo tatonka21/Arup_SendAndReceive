@@ -75,6 +75,7 @@ public:
     vector <Ball> balls;
     
     ofParameterGroup parameters;
+    ofParameterGroup calibrationParameters;
     
     ofParameterGroup categories;
     ofParameter<ofColor> colour0;
@@ -124,6 +125,7 @@ public:
     //ofParameter<bool> london;
  
     ofxPanel gui;
+    ofxPanel guiCalibration;
  
     char sequencer = 0;
     char *gammaLUT;
