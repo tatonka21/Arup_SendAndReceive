@@ -51,7 +51,7 @@ void ofApp::setupGUI(){
     categories.add(colour1);
     categories.add(colour2);
     
-    triggers.setName("Triggers");
+    triggers.setName("Trigger Simulation");
     triggers.add(trig1.set("Trigger1", false));
     triggers.add(trig1Cat.set("Category1", 0, 0, 2));
     triggers.add(trig1Sent.set("Sentiment1", 128, 0, 512));
@@ -106,9 +106,8 @@ void ofApp::setupGUI(){
     gui.loadFromFile("settings.xml");
     gui.minimizeAll();
 
-    guiCalibration.setup(calibrationParameters);
+    guiCalibration.setup(calibrationParameters, "calibration.xml" ,230, 400 );
     guiCalibration.loadFromFile("calibration.xml");
-    guiCalibration.setPosition(230, 400);
 
 }
 
