@@ -73,7 +73,7 @@ void Ball::draw(ofParameterGroup& palette){
     c.setBrightness(50);
     ofSetColor(c);
     for (int i = 0; i < 10; i++){
-        ofCircle(0, pos, i*pulse);
+        ofCircle(0, pos, i*radius);
     }
     ofEnableBlendMode(OF_BLENDMODE_ALPHA);
 }

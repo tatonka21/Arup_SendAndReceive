@@ -24,7 +24,7 @@
 	</WorkLoad>
 <Settings/>
 <Categories>
-		<Happiness>0, 127, 255, 255</Happiness>
+		<Happiness>0, 127, 255, 112</Happiness>
 		<Speed>1</Speed>
 		<Length>3</Length>
 		<Stresslevel>255, 0, 0, 255</Stresslevel>
@@ -32,7 +32,7 @@
 	<Size>1</Size>
 		<PulseSize>3</PulseSize>
 	<Pulse_Size>4</Pulse_Size>
-		<Pulse_Speed>0.0918367</Pulse_Speed>
+		<Pulse_Speed>0.122449</Pulse_Speed>
 	</Categories>
 	<Calibration>
 		<Trigger1>0</Trigger1>
