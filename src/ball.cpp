@@ -20,6 +20,7 @@ void Ball::setup(int _startPos, int _category, int _sentiment){
     pulseUp = true;
     pulse = 0;
     radius = 0;
+    delay = 60;
     
 }
 
@@ -35,11 +36,13 @@ void Ball::update(ofParameterGroup& palette){
     int speed = palette.getInt("Speed");
     float pulseSpeed = palette.getFloat("Pulse Speed");
 
+    if (delay == 0){
     // divide sentiment by 1.28 to get 400 pixels
     if (pos > sentiment/1.28)
         pos = pos - speed;
     if (pos < sentiment/1.28)
         pos = pos + speed;
+    }
     
     if (pulseUp)
         pulse = pulse + pulseSpeed;
@@ -55,6 +58,8 @@ void Ball::update(ofParameterGroup& palette){
 
 
 void Ball::draw(ofParameterGroup& palette){
+    
+    if (delay >0) delay--;
     
     ofColor c;
     switch (category){

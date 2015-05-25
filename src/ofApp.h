@@ -11,7 +11,7 @@ class ofApp : public ofBaseApp{
 #define MAC2 "90:A2:DA:FB:1B:33"  // 4TH FLOOR
 #define MAC3 "90:A2:DA:FB:11:AE"  // 3RD FLOOR
 #define MAC4 "90:A2:DA:F8:5C:71"  // 2ND FLOOR
-#define MAC5 "90:A2:DA:F8:5E:68"  // 1ST FLOOR
+#define MAC5 "90:A2:DA:F8:18:A4"  // 1ST FLOOR
 #define MAC6 "90:A2:DA:F8:5A:5C"  // GROUND FLOOR
 #define MAC7 "90:A2:DA:F8:5E:68"  // NOTHING YET
 

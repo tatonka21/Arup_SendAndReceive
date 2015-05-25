@@ -32,6 +32,8 @@ public:
     int category;
     int sentiment;
     
+    int delay;
+    
  
 };
 #endif

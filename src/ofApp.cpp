@@ -299,6 +299,11 @@ void ofApp::printInformation(int x, int y){
     
     ofDrawBitmapString("Framerate: ", 0, 220);
     ofDrawBitmapString(ofToString(ofGetFrameRate()), 110, 220);
+
+    if (balls.size()>0){
+        ofDrawBitmapString("Ball Delay: ", 0, 240);
+        ofDrawBitmapString(ofToString(balls[balls.size()-1].delay), 110, 240);
+    }
     ofPopMatrix();
 
 }
@@ -497,6 +502,7 @@ void ofApp::sendUDP(){
 //--------------------------------------------------------------
 void ofApp::exit(){
     gui.saveToFile( "settings.xml" );
+    TCP.close();
 }
 
 //--------------------------------------------------------------
