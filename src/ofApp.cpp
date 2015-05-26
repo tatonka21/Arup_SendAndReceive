@@ -45,7 +45,7 @@ void ofApp::setupGUI(){
     categories.add(speed.set("Speed", 2, 0, 20));
     categories.add(length.set("Size", 2, 0, 10));
     categories.add(pulseSize.set("Pulse Size", 3, 0, 10));
-    categories.add(pulseSpeed.set("Pulse Speed", 0.5, 0, 3));
+    categories.add(pulseSpeed.set("Pulse Speed", 0.5, 0, 1));
     
     categories.add(colour0);
     categories.add(colour1);
@@ -87,9 +87,9 @@ void ofApp::setupGUI(){
     parameters.setName("Settings");
     //parameters.add(london.set(" In London", true));
     parameters.add(brightness.set( "Brightness", 255, 0, 512 ));
-    parameters.add(speedRed.set( "Red Speed", 1, 0, 50 ));
-    parameters.add(speedGreen.set( "Green Speed", 1, 0, 50 ));
-    parameters.add(speedBlue.set( "Blue Speed", 1, 0, 50 ));
+    parameters.add(speedRed.set( "Red Speed", 1, 0, 10 ));
+    parameters.add(speedGreen.set( "Green Speed", 1, 0, 10 ));
+    parameters.add(speedBlue.set( "Blue Speed", 1, 0, 10 ));
     parameters.add(faderRed.set( "Red", 255, 0, 255 ));
     parameters.add(faderGreen.set( "Green", 255, 0, 255 ));
     parameters.add(faderBlue.set( "Blue", 255, 0, 255 ));
@@ -502,6 +502,17 @@ void ofApp::sendUDP(){
 //--------------------------------------------------------------
 void ofApp::exit(){
     gui.saveToFile( "settings.xml" );
+    
+    for(unsigned int i = 0; i < (unsigned int)TCP.getLastID(); i++){
+        
+        if( !TCP.isClientConnected(i) )continue;
+        
+        ofLog(OF_LOG_NOTICE, "disconnect " + ofToString(i) );
+        
+        TCP.disconnectClient(i);
+    }
+
+    
     TCP.close();
 }
 

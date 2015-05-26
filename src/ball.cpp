@@ -20,7 +20,7 @@ void Ball::setup(int _startPos, int _category, int _sentiment){
     pulseUp = true;
     pulse = 0;
     radius = 0;
-    delay = 60;
+    delay = 40;
     
 }
 
@@ -31,9 +31,9 @@ void Ball::moveTo(){
 
 void Ball::update(ofParameterGroup& palette){
     
-    int size = palette.getInt("Size");
-    int pulseSize = palette.getInt("Pulse Size");
-    int speed = palette.getInt("Speed");
+    float size = palette.getFloat("Size");
+    float pulseSize = palette.getFloat("Pulse Size");
+    float speed = palette.getFloat("Speed");
     float pulseSpeed = palette.getFloat("Pulse Speed");
 
     if (delay == 0){
@@ -58,9 +58,7 @@ void Ball::update(ofParameterGroup& palette){
 
 
 void Ball::draw(ofParameterGroup& palette){
-    
-    if (delay >0) delay--;
-    
+
     ofColor c;
     switch (category){
         case 0:
@@ -74,10 +72,16 @@ void Ball::draw(ofParameterGroup& palette){
             break;
     }
 
+    if (delay >0) {
+        delay--;
+    }
+
+    c.setSaturation(c.getSaturation() - c.getSaturation() * delay/30);
+    ofLog(OF_LOG_NOTICE, ofToString(c.getSaturation()));
+    
     ofEnableBlendMode(OF_BLENDMODE_ADD);
-    c.setBrightness(50);
     ofSetColor(c);
-    for (int i = 0; i < 10; i++){
+    for (int i = 10; i > 0; i--){
         ofCircle(0, pos, i*radius);
     }
     ofEnableBlendMode(OF_BLENDMODE_ALPHA);

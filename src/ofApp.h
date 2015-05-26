@@ -15,8 +15,8 @@ class ofApp : public ofBaseApp{
 #define MAC6 "90:A2:DA:F8:5A:5C"  // GROUND FLOOR
 #define MAC7 "90:A2:DA:F8:5E:68"  // NOTHING YET
 
-#define E682_ADDRESS "192.168.152.251"
-//#define E682_ADDRESS "192.168.1.206"
+//#define E682_ADDRESS "192.168.152.251"
+#define E682_ADDRESS "192.168.1.206"
 
     
 public:
@@ -79,9 +79,9 @@ public:
     
     ofParameterGroup categories;
     ofParameter<ofColor> colour0;
-    ofParameter<int> speed;
-    ofParameter<int> length;
-    ofParameter<int> pulseSize;
+    ofParameter<float> speed;
+    ofParameter<float> length;
+    ofParameter<float> pulseSize;
     ofParameter<float> pulseSpeed;
     ofParameter<ofColor> colour1;
     ofParameter<ofColor> colour2;
@@ -121,7 +121,7 @@ public:
     ofParameter<int> trig7Sent;
 
     
-    ofParameter<int> brightness, speedRed, speedGreen, speedBlue, faderRed, faderGreen, faderBlue, shift;
+    ofParameter<float> brightness, speedRed, speedGreen, speedBlue, faderRed, faderGreen, faderBlue, shift;
     //ofParameter<bool> london;
  
     ofxPanel gui;

@@ -25,7 +25,7 @@ public:
     void draw(ofParameterGroup& palette);
     
     // Properties
-    int pos;
+    float pos;
     float radius;
     float pulse;
     bool pulseUp ;
