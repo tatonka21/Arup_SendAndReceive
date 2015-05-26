@@ -147,6 +147,10 @@ void ofApp::update(){
     generateImage();
     sendUDP();
     
+    // at 3am
+    if (ofGetTimestampString("%H%M") == "0300")
+        balls.clear();
+    
 }
 
 
@@ -242,31 +246,31 @@ void ofApp::generateImage(){
         //pixels.setColor(0, i, );
         testImage.setColor(0, i, ofColor(colorR, colorG, colorB));
     }
-        //bgPixels.setColor(0, i, ofColor(colorR, colorG, colorB));
-        testImage.update();
-        //texture.loadData(bgPixels);
-        
-        //begin FBO
-        fbo.begin();
-        //ofSetColor(0, 0, 0, 255);
-        //ofRect(0, 0, 50, 400);
-        //draw the background image
-        //testImage.draw(0,0);
-        ofSetColor(255, 255);
+    //bgPixels.setColor(0, i, ofColor(colorR, colorG, colorB));
+    testImage.update();
+    //texture.loadData(bgPixels);
+    
+    //begin FBO
+    fbo.begin();
+    //ofSetColor(0, 0, 0, 255);
+    //ofRect(0, 0, 50, 400);
+    //draw the background image
+    //testImage.draw(0,0);
+    ofSetColor(255, 255);
 
-        testImage.draw(0, 0, 50, 400);
-        
-        //lets's calculate and draw the balls:
-        for (int i = 0 ; i<balls.size(); i++) {
-            balls[i].update(categories);
-            balls[i].draw(categories);
-        }
-        ofSetColor(255, 255);
+    testImage.draw(0, 0, 50, 400);
+    
+    //lets's calculate and draw the balls:
+    for (int i = 0 ; i<balls.size(); i++) {
+        balls[i].update(categories);
+        balls[i].draw(categories);
+    }
+    ofSetColor(255, 255);
 
-        //end FBO
-        fbo.end();
-        
-        fbo.readToPixels(pixels);
+    //end FBO
+    fbo.end();
+    
+    fbo.readToPixels(pixels);
     
 }
 
@@ -498,6 +502,17 @@ void ofApp::sendUDP(){
 }
 
 
+//--------------------------------------------------------------
+void ofApp::removeBalls(){
+    for (int i=0; i < balls.size(); i++){
+        
+        
+    }
+
+
+}
+
+
 
 //--------------------------------------------------------------
 void ofApp::exit(){
@@ -518,6 +533,8 @@ void ofApp::exit(){
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
+    if (key == 'x')
+        balls.clear();
 }
 
 //--------------------------------------------------------------

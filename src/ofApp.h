@@ -15,8 +15,8 @@ class ofApp : public ofBaseApp{
 #define MAC6 "90:A2:DA:F8:5A:5C"  // GROUND FLOOR
 #define MAC7 "90:A2:DA:F8:5E:68"  // NOTHING YET
 
-//#define E682_ADDRESS "192.168.152.251"
-#define E682_ADDRESS "192.168.1.206"
+#define E682_ADDRESS "192.168.152.251"
+//#define E682_ADDRESS "192.168.1.206"
 
     
 public:
@@ -31,6 +31,8 @@ public:
     void sendUDP();
     void printInformation(int x, int y);
     void checkTriggers();
+    
+    void removeBalls();
     
     void newBall(int source, int category);
 

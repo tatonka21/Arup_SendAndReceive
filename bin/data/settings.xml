@@ -1,11 +1,11 @@
 <Settings>
-	<Brightness>79</Brightness>
-	<Red_Speed>4.9</Red_Speed>
-	<Green_Speed>6.9</Green_Speed>
+	<Brightness>314.88</Brightness>
+	<Red_Speed>0.75</Red_Speed>
+	<Green_Speed>3.6</Green_Speed>
 	<Blue_Speed>1.3</Blue_Speed>
-	<Red>255</Red>
+	<Red>39.525</Red>
 	<Green>8.925</Green>
-	<Blue>255</Blue>
+	<Blue>52.275</Blue>
 	<Shift>100</Shift>
 	<Happiness>
 		<Colour>255, 0, 0, 255</Colour>
@@ -24,14 +24,14 @@
 	</WorkLoad>
 <Settings/>
 <Categories>
-		<Happiness>0, 34, 87, 82</Happiness>
+		<Happiness>0, 34, 130, 82</Happiness>
 		<Speed>5.91837</Speed>
 		<Length>3</Length>
 		<Stresslevel>255, 0, 0, 34</Stresslevel>
-		<Workload>0, 108, 0, 97</Workload>
-	<Size>0.918367</Size>
+		<Workload>0, 50, 0, 122</Workload>
+	<Size>0.510204</Size>
 		<PulseSize>3</PulseSize>
-	<Pulse_Size>7.29592</Pulse_Size>
+	<Pulse_Size>6.58163</Pulse_Size>
 		<Pulse_Speed>0.127551</Pulse_Speed>
 	</Categories>
 	<Calibration>
@@ -115,7 +115,7 @@
 		<Sentiment1>164</Sentiment1>
 		<Trigger2>0</Trigger2>
 		<Category2>2</Category2>
-		<Sentiment2>114</Sentiment2>
+		<Sentiment2>451</Sentiment2>
 		<Trigger3>0</Trigger3>
 		<Category3>0</Category3>
 		<Sentiment3>457</Sentiment3>
