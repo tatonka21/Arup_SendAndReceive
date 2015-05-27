@@ -75,7 +75,7 @@ void ofApp::setupGUI(){
     triggers.add(trig7Sent.set("Sentiment7", 128, 0, 512));
     
     
-    calibration.setName("Calibration");
+    calibration.setName("Positions");
     calibration.add(trig1Pos.set("Position 1", 50, 0, 400));
     calibration.add(trig2Pos.set("Position 2", 100, 0, 400));
     calibration.add(trig3Pos.set("Position 3", 150, 0, 400));
@@ -319,11 +319,14 @@ void ofApp::receiveTCP(){
     // for each client lets send them a message letting them know what port
     // they are connected on
     //
+    /*  LET'S NOT
     for(int i = 0; i < TCP.getLastID(); i++){
         if( !TCP.isClientConnected(i) )continue;
         
         TCP.send(i, "Hello YUN - Connected on port - "+ofToString(TCP.getClientPort(i)) + " Client ID " + ofToString(i) );
     }
+     
+    */
 
     // Check for messages
     //
@@ -365,6 +368,9 @@ void ofApp::receiveTCP(){
         vector<string> splitString = ofSplitString(str, ",");
         if (splitString.size() == 4){
             
+            TCP.send(i, "Message Received! - from IP " + ofToString(TCP.getClientIP(i)));
+
+            
             // Set variables for on screen infomation
             macAddress = splitString[0];
             category = ofToInt(splitString[1]);
@@ -380,12 +386,12 @@ void ofApp::receiveTCP(){
             
             
             // And setup our triggers
-            if (macAddress == MAC1) {        //  arduino 1
+            if (macAddress == MAC5) {        //  arduino 1
                 trig1Cat = category;
                 trig1Sent = sentiment;
                 trig1 = true;
             }
-            if (macAddress == MAC2) {        //  arduino 2
+            if (macAddress == MAC4) {        //  arduino 2
                 trig2Cat = category;
                 trig2Sent = sentiment;
                 trig2 = true;
@@ -395,22 +401,22 @@ void ofApp::receiveTCP(){
                 trig3Sent = sentiment;
                 trig3 = true;
             }
-            if (macAddress == MAC4) {        //  arduino 4
+            if (macAddress == MAC2) {        //  arduino 4
                 trig4Cat = category;
                 trig4Sent = sentiment;
                 trig4 = true;
             }
-            if (macAddress == MAC5) {        //  arduino 5
+            if (macAddress == MAC1) {        //  arduino 5
                 trig5Cat = category;
                 trig5Sent = sentiment;
                 trig5 = true;
             }
-            if (macAddress == MAC6) {        //  arduino 6
+            if (macAddress == MACG) {        //  arduino 6
                 trig6Cat = category;
                 trig6Sent = sentiment;
                 trig6= true;
             }
-            if (macAddress == MAC7) {        //  arduino 7
+            if (macAddress == MACB) {        //  arduino 7
                 trig7Cat = category;
                 trig7Sent = sentiment;
                 trig7 = true;
@@ -487,18 +493,18 @@ void ofApp::sendUDP(){
     }
     
     float zero = 0;
-    message1 += zero;
-    message1 += zero;   // fill in the last two bytes
-    message2 += zero;
-    message2 += zero;   // fill in the last two bytes
-    message3 += zero;
-    message3 += zero;   // fill in the last two bytes
+    //message1 += zero;
+    //message1 += zero;   // fill in the last two bytes
+    //message2 += zero;
+    //message2 += zero;   // fill in the last two bytes
+    //message3 += zero;
+    //message3 += zero;   // fill in the last two bytes
     
     
+    udpConnection.Send(message3.c_str(),message3.length());
     
     udpConnection.Send(message1.c_str(),message1.length());
     udpConnection.Send(message2.c_str(),message2.length());
-    udpConnection.Send(message3.c_str(),message3.length());
 }
 
 

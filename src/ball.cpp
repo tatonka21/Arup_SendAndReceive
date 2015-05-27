@@ -52,7 +52,7 @@ void Ball::update(ofParameterGroup& palette){
     if (pulse < 0 | pulse > pulseSize )
         pulseUp = !pulseUp;
     
-    radius = size + pulse * pulseSpeed;
+    radius = size + pulse;
 
 }
 

@@ -7,13 +7,13 @@
 
 class ofApp : public ofBaseApp{
     
-#define MAC1 "90:A2:DA:F9:0D:BE"  // 5TH FLOOR
-#define MAC2 "90:A2:DA:FB:1B:33"  // 4TH FLOOR
+#define MAC5 "90:A2:DA:F9:0D:BE"  // 5TH FLOOR
+#define MAC4 "90:A2:DA:FB:1B:33"  // 4TH FLOOR
 #define MAC3 "90:A2:DA:FB:11:AE"  // 3RD FLOOR
-#define MAC4 "90:A2:DA:F8:5C:71"  // 2ND FLOOR
-#define MAC5 "90:A2:DA:F8:18:A4"  // 1ST FLOOR
-#define MAC6 "90:A2:DA:F8:5A:5C"  // GROUND FLOOR
-#define MAC7 "90:A2:DA:F8:5E:68"  // NOTHING YET
+#define MAC2 "90:A2:DA:F8:5C:71"  // 2ND FLOOR
+#define MAC1 "90:A2:DA:FB:18:A4"  // 1ST FLOOR
+#define MACG "90:A2:DA:F8:5A:5C"  // GROUND FLOOR
+#define MACB "90:A2:DA:F8:5E:68"  // NOTHING YET
 
 #define E682_ADDRESS "192.168.152.251"
 //#define E682_ADDRESS "192.168.1.206"
