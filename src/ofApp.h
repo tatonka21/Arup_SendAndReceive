@@ -16,7 +16,7 @@ class ofApp : public ofBaseApp{
 #define MACB "90:A2:DA:F8:5E:68"  // NOTHING YET
 
 #define E682_ADDRESS "192.168.152.251"
-//#define E682_ADDRESS "192.168.1.206"
+//#define E682_ADDRESS "192.168.1.203"
 
     
 public:
@@ -31,6 +31,11 @@ public:
     void sendUDP();
     void printInformation(int x, int y);
     void checkTriggers();
+
+    void modeAdditive(bool & value);
+    void modeMultiply(bool & value);
+    void modeScreen(bool & value);
+    void modeAlpha(bool & value);
     
     void removeBalls();
     
@@ -87,6 +92,11 @@ public:
     ofParameter<float> pulseSpeed;
     ofParameter<ofColor> colour1;
     ofParameter<ofColor> colour2;
+    ofParameter<bool> additive;
+    ofParameter<bool> multiply;
+    ofParameter<bool> screen;
+    ofParameter<bool> alpha;
+    bool alphaLock;
 
     ofParameterGroup calibration;
     ofParameter<int> trig1Pos;
@@ -124,7 +134,8 @@ public:
 
     
     ofParameter<float> brightness, speedRed, speedGreen, speedBlue, faderRed, faderGreen, faderBlue, shift;
-    //ofParameter<bool> london;
+    
+    
  
     ofxPanel gui;
     ofxPanel guiCalibration;

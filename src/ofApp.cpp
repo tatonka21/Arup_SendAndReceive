@@ -37,8 +37,79 @@ void ofApp::setup(){
 
 //--------------------------------------------------------------
 
+void ofApp::modeAdditive(bool & value){
+    if (value){
+        multiply = false;
+        screen = false;
+        alpha = false;
+    }
+    else{
+        alpha = true;
+    }
+    
+}
+
+//--------------------------------------------------------------
+
+void ofApp::modeMultiply(bool & value){
+    if (value){
+        additive = false;
+        screen = false;
+        alpha = false;
+    }
+    else{
+        alpha = true;
+    }
+}
+
+//--------------------------------------------------------------
+
+void ofApp::modeScreen(bool & value){
+    if (value){
+        additive = false;
+        multiply = false;
+        alpha = false;
+    }
+    else{
+        alpha = true;
+    }
+    
+}
+
+//--------------------------------------------------------------
+
+void ofApp::modeAlpha(bool & value){
+    /*if (!additive & !screen & !multiply){
+    
+        if (!value){
+            alpha = true;
+        }
+
+    }*/
+    
+    if (value){
+        //additive = false;
+        //multiply = false;
+        //screen = false;
+    }
+    else{
+        alpha = true;
+    }
+    
+    
+}
+
+//--------------------------------------------------------------
+
 void ofApp::setupGUI(){
-    categories.setName("Categories");
+    
+    // SETUP LISTENERS
+    additive.addListener(this, &ofApp::modeAdditive);
+    multiply.addListener(this, &ofApp::modeMultiply);
+    screen.addListener(this, &ofApp::modeScreen);
+    //alpha.addListener(this, &ofApp::modeAlpha);
+    
+    categories.setName("Category Settings");
     colour0.set("Happiness",ofColor(127),ofColor(0,0),ofColor(255));
     colour1.set("Stresslevel",ofColor(127),ofColor(0,0),ofColor(255));
     colour2.set("Workload",ofColor(127),ofColor(0,0),ofColor(255));
@@ -46,7 +117,10 @@ void ofApp::setupGUI(){
     categories.add(length.set("Size", 2, 0, 10));
     categories.add(pulseSize.set("Pulse Size", 3, 0, 10));
     categories.add(pulseSpeed.set("Pulse Speed", 0.5, 0, 1));
-    
+    categories.add(additive.set("Additive", false));
+    categories.add(multiply.set("Multiply", false));
+    categories.add(screen.set("Screen", false));
+    categories.add(alpha.set("Alpha", true));
     categories.add(colour0);
     categories.add(colour1);
     categories.add(colour2);
@@ -202,7 +276,15 @@ void ofApp::checkTriggers(){
         trig7.set(false);
     }
     
+    if (!additive & !alpha & !multiply & !screen){
+        alpha = true;
+    }
+
+    if (alpha & multiply) multiply = false;
+    if (alpha & screen) screen = false;
+    if (alpha & additive) additive = false;
     
+
 }
 
 //--------------------------------------------------------------

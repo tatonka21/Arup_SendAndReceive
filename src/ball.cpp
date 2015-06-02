@@ -59,6 +59,12 @@ void Ball::update(ofParameterGroup& palette){
 
 void Ball::draw(ofParameterGroup& palette){
 
+    
+    float size = palette.getFloat("Size");
+    float pulseSize = palette.getFloat("Pulse Size");
+    float speed = palette.getFloat("Speed");
+    float pulseSpeed = palette.getFloat("Pulse Speed");
+
     ofColor c;
     switch (category){
         case 0:
@@ -79,10 +85,19 @@ void Ball::draw(ofParameterGroup& palette){
     c.setSaturation(c.getSaturation() - c.getSaturation() * delay/30);
     ofLog(OF_LOG_NOTICE, ofToString(c.getSaturation()));
     
-    ofEnableBlendMode(OF_BLENDMODE_ADD);
+    if (palette.getBool("Additive"))
+        ofEnableBlendMode(OF_BLENDMODE_ADD);
+    if (palette.getBool("Multiply"))
+        ofEnableBlendMode(OF_BLENDMODE_MULTIPLY);
+    if (palette.getBool("Screen"))
+        ofEnableBlendMode(OF_BLENDMODE_SCREEN);
+    if (palette.getBool("Alpha"))
+        ofEnableBlendMode(OF_BLENDMODE_ALPHA);
+    
     ofSetColor(c);
+    
     for (int i = 10; i > 0; i--){
-        ofCircle(0, pos, i*radius);
+        ofCircle(0, pos, size + i*(radius-size)/10);
     }
     ofEnableBlendMode(OF_BLENDMODE_ALPHA);
 }
